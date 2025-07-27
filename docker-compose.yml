@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  transactions_service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: transactions_service
+    ports:
+      - "6000:3000"
+    volumes:
+      - .:/app
+    networks:
+      - loomi_network
+    restart: unless-stopped
+    env_file:
+      - .env
+
+  postgres:
+    image: postgres:15
+    container_name: postgres_container_transactions_service
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: transactions_service_db
+      POSTGRES_USER: transactions
+      POSTGRES_PASSWORD: 12345678
+    ports:
+      - "4321:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - loomi_network
+
+volumes:
+  pgdata:
+
+networks:
+  loomi_network:
+    external: true
