@@ -9,7 +9,11 @@ services:
     ports:
       - "6000:3000"
     volumes:
-      - .:/app
+      - ./src:/app/src
+      - ./prisma:/app/prisma
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+      - ./tsconfig.json:/app/tsconfig.json
     networks:
       - loomi_network
     restart: unless-stopped
