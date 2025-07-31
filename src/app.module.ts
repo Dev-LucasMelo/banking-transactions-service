@@ -5,6 +5,7 @@ import { HttpModule } from '@nestjs/axios';
 import { ConfigModule } from '@nestjs/config';
 import { TransactionsConsumerModule } from './transactions-consumer/transactions-consumer.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { TransactionsModule } from './transactions/transactions.module';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { PrismaModule } from './prisma/prisma.module';
     }),
     HttpModule,
     TransactionsConsumerModule,
-    PrismaModule
+    PrismaModule,
+    TransactionsModule
   ],
   controllers: [AppController],
   providers: [AppService],

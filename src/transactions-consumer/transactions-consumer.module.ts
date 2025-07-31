@@ -5,8 +5,9 @@ import { HttpModule } from '@nestjs/axios';
 import { PrismaModule } from 'src/prisma/prisma.module';
 
 @Module({
-  imports: [HttpModule,PrismaModule],
+  imports: [HttpModule, PrismaModule],
   providers: [TransactionsConsumerService],
-  controllers: [TransactionsConsumerController]
+  controllers: [TransactionsConsumerController],
+  exports: [TransactionsConsumerService]
 })
-export class TransactionsConsumerModule {}
+export class TransactionsConsumerModule { }
