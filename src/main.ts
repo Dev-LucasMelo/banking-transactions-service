@@ -11,10 +11,19 @@ async function bootstrap() {
       client: {
         clientId: 'transactions-service-consumer',
         brokers: [process.env.KAFKA_BROKER || 'kafka:9092'],
+        retry: {
+          initialRetryTime: 300,
+          retries: 5,
+          restartOnFailure: async () => false, 
+        },
       },
       consumer: {
         groupId: 'transactions-consumer',
       },
+      run: { 
+        autoCommit: false 
+      }
+
     },
   });
 
