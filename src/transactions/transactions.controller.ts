@@ -12,4 +12,9 @@ export class TransactionsController {
     async getTransfers(@Param('id') id: string) {
         return await this.service.findTransactionsByOriginClientId(id)
     }
+        
+    @Get('/:id')
+    async getTransferDetails(@Param('id') id: string) {
+        return await this.service.findTransactionById(id)
+    }
 }

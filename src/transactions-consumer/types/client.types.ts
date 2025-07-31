@@ -1,4 +1,4 @@
-type conta = {
+export type conta = {
     id: string
     numero_conta: string
     agencia: string

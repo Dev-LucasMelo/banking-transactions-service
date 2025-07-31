@@ -3,7 +3,7 @@ import { eventData } from './types/event.types';
 import { HttpService } from '@nestjs/axios';
 import { ConfigService } from '@nestjs/config';
 import { firstValueFrom } from 'rxjs';
-import { responseType } from './types/response.types';
+import { clientResponseType, responseType } from './types/response.types';
 import { clientData } from './types/client.types';
 import { PrismaService } from 'src/prisma/prisma.service';
 
@@ -32,6 +32,16 @@ export class TransactionsConsumerService {
     async getDataClientByBankingData(bankingAccountNumber: string, bankingAgencyNumber: string): Promise<any> {
         return await firstValueFrom(
             this.httpService.get(`${this.BaseUrlClient}client/banking/${bankingAccountNumber}/${bankingAgencyNumber}`)
+        ).then((response) => {
+            return response.data;
+        }).catch((err) => {
+            throw new BadRequestException('Erro ao buscar cliente');
+        });
+    }
+
+    async getDataClientByAccountId(accountId: string): Promise<clientResponseType> {
+        return await firstValueFrom(
+            this.httpService.get(`${this.BaseUrlClient}account/${accountId}`)
         ).then((response) => {
             return response.data;
         }).catch((err) => {
